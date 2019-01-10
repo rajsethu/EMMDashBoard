@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- deny all events with a level below WARN or what is set in the environment 
+			variable LOGLEVEL_CONSOLE -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>${LOGLEVEL_CONSOLE:-ERROR}</level>
+		</filter>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+		</layout>
+	</appender>
+	<appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<destination>${LOGGING_SERVER_HOST:-127.0.0.1}:${LOGGING_SERVER_PORT:-5425}</destination>
+		<ssl>
+			<trustStore>
+				<location>classpath:cacerts.truststore</location>
+				<password>changeit</password>
+			</trustStore>
+		</ssl>
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+    </appender>
+	<root level="${LOGLEVEL_ROOT:-INFO}">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOGSTASH" />
+	</root>
+
+	<logger name="com.comcast" level="${LOGLEVEL_COMCAST:-INFO}"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOGSTASH" />
+	</logger>
+	<logger name="org.springframework" level="${LOGLEVEL_SPRING:-TRACE}"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOGSTASH" />
+	</logger>
+	<logger name="org.apache.cxf" level="${LOGLEVEL_CXF:-INFO}"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOGSTASH" />
+	</logger>
+	<logger name="org.springframework.security" level="${LOGLEVEL_AUTH:-DEBUG}"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOGSTASH" />
+	</logger>
+</configuration>

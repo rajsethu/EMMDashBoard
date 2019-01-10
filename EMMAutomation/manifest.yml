@@ -1,0 +1,24 @@
+---
+name: NextGenBillerEventProcessor
+memory: 1024M
+disk_quota: 512M
+buildpack: java_buildpack_offline
+timeout: 180
+services:
+  - primary-ds
+host: NextGenBillerEventProcessor
+path: target/NextGenBillerEventProcessor-0.0.1-SNAPSHOT.jar
+instances: 1
+env:
+  JAVA_OPTS: " -Duser.timezone=UTC "
+  LOGLEVEL_COMCAST: DEBUG
+  LOGLEVEL_SPRING: INFO
+  LOGLEVEL_AUTH: DEBUG
+  LOGLEVEL_CONSOLE: WARN
+
+  # Lower Environment OAuth2 Trusted Key (default):
+  # security.oauth2.resource.jwt.keyValue: -----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuyHtPtU4wlq70yhZ6RSvuhNSp3TqXaDu2jLnVtGasqV8Iybvgzlx6bWD4wbky9u7g5g8uX/HsCTTse/dhniAnvxWU5PW+jyVUSCN4UX98PSYH2C/QhLrJD6wzQ4CTJxJq7uhfZLkpgJJAl7vr8qLegsYzYg2LC5x/uu7e/QtJfSxmvpGDNyrj3rvWKkodghXWkYQ+qrv7k5vii20pRnnKsN6JfKCTNCVp0Sz5h49ko+x1buTe4dOYpqM067bDk1bgf2kI7MoqJ3e+p9yHgJs+K3BVOKUPPaLBtSMJokGxdyYwND8MltmvCuAmMYhGENuWQpwtca/JotojpPxHxn3rQIDAQAB-----END PUBLIC KEY-----
+
+  # Production Environment OAuth2 Trusted Key (uncomment to activate):
+  # oauth2-key.websec-prod: -----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArffltMPQNlx9eyY7iAcqb7hCpl9nTqPKZQj7Ydlw7sRFKqAIFdlGdkd1tGnLx5M+rf8VUNCx3xQRVvnIwaThXrERdFbjs+gjQonjuEaq1IkVGhXBwJWa56TFFcj3FXnYdtiwNUMIgKfyPgh52+5cKJxG/inYpLcdAttnA9Kw+qD/e+JUWT5oPArSXn3cp4uVjfdizW89QUUfFoY9YDJoOl59X8ONTk41qDD5xluygZomPVXsZenSGNmYJ+CaF4tuG+Eznqo9gTdNAJiFuCYcz177pwW2XAvO8Rg0C/1YS1il7pf/4s2mkfHzVAiGxlmNZDe5qaIC4Z1+wUsoYyUKPwIDAQAB-----END PUBLIC KEY----- 
+  

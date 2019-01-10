@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Implementation-Title: EM&M Spring Boot Data REST Sample
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: sraj003c
+Implementation-Vendor-Id: com.suntec.epa.automation
+Build-Jdk: 1.8.0_66
+Implementation-URL: http://projects.spring.io/spring-boot/EMMAutomatio
+ n/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: com.suntec.epa.dashboard.automationservice.Application
+
